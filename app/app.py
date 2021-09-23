@@ -8,7 +8,7 @@ import pickle
 app = Flask(__name__)
 
 def load_model():
-    model = keras.models.load_model('model.h5')
+    model = keras.models.load_model('app/model.h5')
     return (model)
 
 @app.route('/')
@@ -20,7 +20,7 @@ def predict():
     maxlen = 100
     text = request.form['Headline']
     tk = Tokenizer()
-    with open('tokenizer.pickle', 'rb') as handle:
+    with open('app/tokenizer.pickle', 'rb') as handle:
         tk = pickle.load(handle)
     X = tk.texts_to_sequences([text])
     X = pad_sequences(X,maxlen=maxlen,padding='post',value=0)
